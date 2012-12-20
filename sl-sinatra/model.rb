@@ -11,7 +11,7 @@ def bootstrap_model
   User.remove
   Event.remove
 
-  unless User.find_by_name('Paulo')
+  unless User.find_by_name('Brain')
     users = %w{Brain Pinky}.map { |name| User.create(:name => name) }
 
 
