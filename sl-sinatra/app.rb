@@ -31,6 +31,28 @@ get '/week' do
   haml :view
 end
 
+get '/next' do
+  @period = {:from => week_end + 1}
+
+  @user = User.where(:name => session['user']).first
+  @events_per_day = Event.find_within_period_for(@user, @period).
+                          group_by { |event| event.start_at.to_date }.
+                          sort
+
+  haml :view
+end
+
+get '/view' do
+  @period = {:from => week_start, :to => week_end}
+
+  @user = User.where(:name => session['user']).first
+  @events_per_day = Event.find_within_period_for(@user, @period).
+                          group_by { |event| event.start_at.to_date }.
+                          sort
+
+  haml :view
+end
+
 # Login/logout actions
 get '/login' do
   @available_users = User.all

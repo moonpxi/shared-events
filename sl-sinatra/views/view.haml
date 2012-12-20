@@ -6,7 +6,11 @@
   %li
     %a{:href => '/new'} New Event
 
-%h3= "Events from #{day_and_month(@period[:from])} to #{day_and_month(@period[:to])}"
+%h3
+  - if @period[:to]
+    = "This Week - from #{day_and_month(@period[:from])} to #{day_and_month(@period[:to])}"
+  - else
+    = "Next Events - from #{day_and_month(@period[:from])}"
 
 .events
   - @events_per_day.each do |date, events|

@@ -38,5 +38,11 @@ def bootstrap_model
                  :end_at => DateTime.now + 0.2,
                  :participants => [users.first])
 
+    Event.create(:title => 'Far far away',
+                 :description => 'Into the future',
+                 :start_at => rand_today + 42,
+                 :participants => [users.first])
+
+
    end
 end
