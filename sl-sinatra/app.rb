@@ -4,8 +4,9 @@ Bundler.require
 
 require_relative 'model'
 require_relative 'helpers/date_formatter'
+require_relative 'helpers/date_picker'
 
-helpers DateFormatter
+helpers DateFormatter, DatePicker
 
 configure do
   MongoMapper.database = 'shared-events-ruby'
