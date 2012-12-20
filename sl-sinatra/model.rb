@@ -12,7 +12,7 @@ def bootstrap_model
   Event.remove
 
   unless User.find_by_name('Paulo')
-    users = %w{Paulo Cris}.map { |name| User.create(:name => name) }
+    users = %w{Brain Pinky}.map { |name| User.create(:name => name) }
 
 
     Event.create(:title => 'Something tomorrow',
