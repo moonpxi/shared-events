@@ -23,7 +23,7 @@ get '/week' do
   @period = {:from => week_start, :to => week_end}
 
   @user = User.where(:name => session['user']).first
-  @events_per_day = Event.within_period_for(@user, @period).where(:start_at => {'$gte' => week_start.to_time, '$lte' => week_end.to_time + 169999}).group_by { |event| event.start_at.to_date }.sort
+  @events_per_day = Event.within_period_for(@user, @period).group_by { |event| event.start_at.to_date }.sort
 
   haml :view
 end
