@@ -9,7 +9,7 @@ class Event
   key :participant_ids, Array
   many :participants, :class_name => 'User', :in => :participant_ids
 
-  def self.within_period_for(user)
+  def self.within_period_for(user, period)
     Event.where(:participant_ids => user.id)
   end
 

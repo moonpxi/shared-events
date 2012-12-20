@@ -3,6 +3,10 @@ require_relative 'model/event'
 
 EVENTS = []
 
+def rand_today
+  DateTime.now + rand - 0.5
+end
+
 def bootstrap_model
   User.remove
   Event.remove
@@ -10,19 +14,29 @@ def bootstrap_model
   unless User.find_by_name('Paulo')
     %w{Paulo Cris}.each { |name| User.create(:name => name) }
 
-    Event.create(:title => 'Play football',
-                 :start_at => DateTime.new(2012, 12, 9, 17, 30),
+
+    Event.create(:title => 'Something tomorrow',
+                 :start_at => rand_today + 1,
+                 :participants => [User.first, User.last])
+
+    Event.create(:title => 'Something yesterday',
+                 :start_at => rand_today - 1,
                  :participants => [User.first])
 
-    Event.create(:title => 'Boiler repairment visit',
-                 :start_at => DateTime.new(2012, 11, 14, 9, 30),
-                 :end_at => DateTime.new(2012, 11, 14, 13, 0),
+    Event.create(:title => 'Something today',
+                 :description => 'Today is today is today',
+                 :start_at => rand_today,
                  :participants => [User.first])
 
-    Event.create(:title => 'Photography course and jewelry course',
-                 :description => 'Hopefully we will have a lunch break',
-                 :start_at => DateTime.new(2012, 11, 17, 10, 0),
-                 :end_at => DateTime.new(2012, 11, 17, 16, 0),
+    Event.create(:title => 'Something next week',
+                 :start_at => rand_today + 7,
                  :participants => [User.first])
-  end
+
+
+    Event.create(:title => 'Something with start and end',
+                 :start_at => DateTime.now,
+                 :end_at => DateTime.now + 0.2,
+                 :participants => [User.first])
+
+   end
 end
