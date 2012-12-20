@@ -15,4 +15,8 @@ module DateFormatter
     return time
   end
 
+  def parse_date(date_string)
+    Date.parse(date_string) if date_string
+  end
+
 end

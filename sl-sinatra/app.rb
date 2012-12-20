@@ -21,29 +21,15 @@ get '/' do
 end
 
 get '/week' do
-  @period = {:from => week_start, :to => week_end}
-
-  @user = User.where(:name => session['user']).first
-  @events_per_day = Event.find_within_period_for(@user, @period).
-                          group_by { |event| event.start_at.to_date }.
-                          sort
-
-  haml :view
+  redirect "/view?from=#{week_start.to_s}&to=#{week_end.to_s}"
 end
 
 get '/next' do
-  @period = {:from => week_end + 1}
-
-  @user = User.where(:name => session['user']).first
-  @events_per_day = Event.find_within_period_for(@user, @period).
-                          group_by { |event| event.start_at.to_date }.
-                          sort
-
-  haml :view
+  redirect "/view?from=#{(week_end + 1).to_s}"
 end
 
 get '/view' do
-  @period = {:from => week_start, :to => week_end}
+  @period = [:from, :to].reduce({}) { |m, p| m.merge(p => parse_date(params[p])) }
 
   @user = User.where(:name => session['user']).first
   @events_per_day = Event.find_within_period_for(@user, @period).

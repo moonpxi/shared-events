@@ -11,7 +11,7 @@ class Event
 
   def self.find_within_period_for(user, period)
     within_period = {'$gte' => period[:from].to_time} 
-    within_period.merge('$lte' => period[:to].to_time + 169999) if period[:to]
+    within_period.merge!('$lte' => period[:to].to_time + 169999) if period[:to]
 
     Event.where(:participant_ids => user.id, :start_at => within_period)
   end
