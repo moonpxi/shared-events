@@ -13,13 +13,13 @@
     = "Next Events - from #{day_and_month(@period[:from])}"
 
 .events
-  - @events_per_day.each do |date, events|
+  - @events_per_day.sort.each do |date, events|
     .day
       .when
         .day.left-side= day_and_month(date)
         .of-week.right-side= week_day(date)
 
-      - events.each do |event|
+      - events.sort_by { |event| event.start_at }.each do |event|
         .event
           .time.left-side= time_of(event)
           .what.right-side= event.title

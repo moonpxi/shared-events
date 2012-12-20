@@ -33,8 +33,7 @@ get '/view' do
 
   @user = User.where(:name => session['user']).first
   @events_per_day = Event.find_within_period_for(@user, @period).
-                          group_by { |event| event.start_at.to_date }.
-                          sort
+                          group_by { |event| event.start_at.to_date }
 
   haml :view
 end
