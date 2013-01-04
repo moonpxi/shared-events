@@ -1,3 +1,6 @@
+%script{:type => "text/javascript", :src => "/js/shared-new.js"}
+
+
 // Should refactor the tab to a more generic place
 %ul{:class => 'tabs'}
   %li{:class => 'selected'}
@@ -7,11 +10,18 @@
   %li
     %a{:href => '/new'} New Event
 
+
 %h3 New Event
 
 %form{:action => '/new', :method => 'POST'}
-  What?</br>
-  %input{:type => 'text', :name => 'title'}
-  When
-  Who
+  .field What?</br>
+  %input{:type => 'text', :name => 'title', :size => 80}
+  </br>
+  .field When?</br>
+  %input{:type => 'text', :id => 'when', :name => 'when'}
+  </br>
+  .field Who?</br>
+  %input{:type => 'text', :name => 'who', :value => @user.name, :size => 50}
+  </br>
+  </br>
   %input{:type => 'submit', :value => 'Create'}
