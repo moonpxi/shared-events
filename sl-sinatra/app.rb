@@ -6,7 +6,11 @@ require_relative 'model'
 require_relative 'helpers/date_formatter'
 require_relative 'helpers/date_picker'
 
-helpers DateFormatter, DatePicker
+helpers DateFormatter, DatePicker do
+  def require_user!
+    @user = User.where(:name => session['user']).first
+  end
+end
 
 configure do
   MongoMapper.database = 'shared-events-ruby'
@@ -14,6 +18,8 @@ configure do
 
   bootstrap_model  
 end
+
+# Viewing events
 
 get '/' do
   redirect '/week' if session['user']
@@ -29,13 +35,21 @@ get '/next' do
 end
 
 get '/view' do
+  require_user!
   @period = [:from, :to].reduce({}) { |m, p| m.merge(p => parse_date(params[p])) }
 
-  @user = User.where(:name => session['user']).first
   @events_per_day = Event.find_within_period_for(@user, @period).
                           group_by { |event| event.start_at.to_date }
 
   haml :view
+end
+
+# New
+
+get '/new' do
+  require_user!
+  
+  haml :new
 end
 
 # Login/logout actions
