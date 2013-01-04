@@ -8,3 +8,10 @@
     %a{:href => '/new'} New Event
 
 %h3 New Event
+
+%form{:action => '/new', :method => 'POST'}
+  What?</br>
+  %input{:type => 'text', :name => 'title'}
+  When
+  Who
+  %input{:type => 'submit', :value => 'Create'}

@@ -52,6 +52,10 @@ get '/new' do
   haml :new
 end
 
+post '/new' do
+  "Posted"
+end
+
 # Login/logout actions
 get '/login' do
   @available_users = User.all
