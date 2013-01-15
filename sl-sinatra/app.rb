@@ -54,7 +54,7 @@ end
 
 post '/new' do
   Event.create(:title => params[:what],
-               :start_at => Date.strptime(params[:when], '%m/%d/%Y').to_time,
+               :start_at => date_for(params[:when]),
                :participants => [User.by_name(params[:who])])
 
   redirect '/week'

@@ -7,4 +7,8 @@ module DatePicker
   def week_end
     week_start + 6
   end 
+
+  def date_for(string)
+    Date.strptime(string, '%m/%d/%Y').to_time
+  end
 end
