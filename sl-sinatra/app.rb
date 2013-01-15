@@ -53,7 +53,11 @@ get '/new' do
 end
 
 post '/new' do
-  "Posted"
+  Event.create(:title => params[:what],
+               :start_at => Date.strptime(params[:when], '%m/%d/%Y').to_time,
+               :participants => [User.where(:name => params[:who]).first])
+
+  redirect '/week'
 end
 
 # Login/logout actions
