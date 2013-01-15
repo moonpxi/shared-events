@@ -53,9 +53,11 @@ get '/new' do
 end
 
 post '/new' do
+  usernames = params[:who].split(',').map { |name| name.strip }
+
   Event.create(:title => params[:what],
                :start_at => date_for(params[:when]),
-               :participants => [User.by_name(params[:who])])
+               :participants => usernames.map { |name| User.by_name(name) })
 
   redirect '/week'
 end
