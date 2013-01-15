@@ -8,7 +8,7 @@ require_relative 'helpers/date_picker'
 
 helpers DateFormatter, DatePicker do
   def require_user!
-    @user = User.where(:name => session['user']).first
+    @user = User.by_name(session['user'])
   end
 end
 
@@ -55,7 +55,7 @@ end
 post '/new' do
   Event.create(:title => params[:what],
                :start_at => Date.strptime(params[:when], '%m/%d/%Y').to_time,
-               :participants => [User.where(:name => params[:who]).first])
+               :participants => [User.by_name(params[:who])])
 
   redirect '/week'
 end
