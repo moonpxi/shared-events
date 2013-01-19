@@ -1,4 +1,4 @@
-(ns se-in-clj.core
+(ns se-in-clj.handler
   (:use compojure.core
         [hiccup.middleware :only (wrap-base-url)])
   (:require [compojure.route :as route]

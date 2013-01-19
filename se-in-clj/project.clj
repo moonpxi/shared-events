@@ -4,4 +4,4 @@
                  [compojure "1.1.5"]
                  [hiccup "1.0.2"]]
   :plugins [[lein-ring "0.8.0"]]
-  :ring {:handler se-in-clj.core/app})
+  :ring {:handler se-in-clj.handler/app})
