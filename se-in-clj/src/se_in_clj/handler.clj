@@ -7,7 +7,7 @@
 
 (defroutes main-routes
   (GET "/" [] "Main page")
-  (GET "/show/:id" [id] (str "ID is " id))
+  (GET "/show/:id" [id] (str "ID is " id " indeed"))
   (route/resources "/")
   (route/not-found "Page not found"))
 
